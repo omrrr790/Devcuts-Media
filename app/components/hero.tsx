@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, Variants } from "framer-motion";
 import {
   ArrowRight, ArrowUpRight, Star, Check, Play, Sparkles,
   Code2, Brain, Smartphone, BarChart3, Layers,
   ShieldCheck, Clock, MousePointerClick,
-  Rocket, ChevronRight, Globe,
+  Rocket, ChevronRight, Globe, Users, TrendingUp,
+  Zap, BadgeCheck, Activity, Award, Quote,
 } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// ─── Variants (no animated blur filters) ──────────────────────────────
+/* ─── Variants ────────────────────────────────────────────────────── */
 const stagger: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
@@ -25,16 +26,16 @@ const scaleIn: Variants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease } },
 };
 
-// ─── Data ──────────────────────────────────────────────────────────────
+/* ─── Data ────────────────────────────────────────────────────────── */
 const rotatingWords = ["Real Results.", "Organic Growth.", "Lasting Impact.", "Measurable ROI."];
 
 const highlights = [
-  { icon: Code2,     label: "Full-Stack Web",  color: "text-indigo-600",  bg: "bg-indigo-50",  border: "border-indigo-100" },
-  { icon: Brain,     label: "AI & Automation", color: "text-violet-600",  bg: "bg-violet-50",  border: "border-violet-100" },
-  { icon: Smartphone,label: "Mobile Apps",     color: "text-sky-600",     bg: "bg-sky-50",     border: "border-sky-100" },
-  { icon: BarChart3, label: "SEO & Growth",    color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
-  { icon: Layers,    label: "ERP / CRM",       color: "text-amber-600",   bg: "bg-amber-50",   border: "border-amber-100" },
-  { icon: Globe,     label: "Cloud & DevOps",  color: "text-rose-600",    bg: "bg-rose-50",    border: "border-rose-100" },
+  { icon: Code2,      label: "Full-Stack Web",  color: "text-indigo-700",  bg: "bg-indigo-50",  border: "border-indigo-100" },
+  { icon: Brain,      label: "AI & Automation", color: "text-violet-700",  bg: "bg-violet-50",  border: "border-violet-100" },
+  { icon: Smartphone, label: "Mobile Apps",     color: "text-sky-700",     bg: "bg-sky-50",     border: "border-sky-100" },
+  { icon: BarChart3,  label: "SEO & Growth",    color: "text-emerald-700", bg: "bg-emerald-50", border: "border-emerald-100" },
+  { icon: Layers,     label: "ERP / CRM",       color: "text-amber-700",   bg: "bg-amber-50",   border: "border-amber-100" },
+  { icon: Globe,      label: "Cloud & DevOps",  color: "text-rose-700",    bg: "bg-rose-50",    border: "border-rose-100" },
 ];
 
 const trustPills = [
@@ -50,16 +51,16 @@ const clients = [
 ];
 
 const techImages = [
-  { src: "/tech/nextjs.png",     alt: "Next.js",     label: "Next.js",     bg: "bg-black" },
-  { src: "/tech/react.png",      alt: "React",       label: "React",       bg: "bg-[#20232a]" },
-  { src: "/tech/typescript.png", alt: "TypeScript",  label: "TypeScript",  bg: "bg-[#3178c6]" },
-  { src: "/tech/nodejs.png",     alt: "Node.js",     label: "Node.js",     bg: "bg-[#026e00]" },
-  { src: "/tech/python.png",     alt: "Python",      label: "Python",      bg: "bg-[#306998]" },
-  { src: "/tech/mongodb.png",    alt: "MongoDB",     label: "MongoDB",     bg: "bg-[#13aa52]" },
-  { src: "/tech/tailwind.png",   alt: "Tailwind",    label: "Tailwind",    bg: "bg-[#0ea5e9]" },
-  { src: "/tech/flutter.png",    alt: "Flutter",     label: "Flutter",     bg: "bg-[#027DFD]" },
-  { src: "/tech/openai.png",     alt: "OpenAI",      label: "OpenAI",      bg: "bg-[#10a37f]" },
-  { src: "/tech/aws.png",        alt: "AWS",         label: "AWS",         bg: "bg-[#FF9900]" },
+  { alt: "Next.js",    label: "Next.js",    bg: "bg-black" },
+  { alt: "React",      label: "React",      bg: "bg-[#20232a]" },
+  { alt: "TypeScript", label: "TypeScript", bg: "bg-[#3178c6]" },
+  { alt: "Node.js",    label: "Node.js",    bg: "bg-[#026e00]" },
+  { alt: "Python",     label: "Python",     bg: "bg-[#306998]" },
+  { alt: "MongoDB",    label: "MongoDB",    bg: "bg-[#13aa52]" },
+  { alt: "Tailwind",   label: "Tailwind",   bg: "bg-[#0ea5e9]" },
+  { alt: "Flutter",    label: "Flutter",    bg: "bg-[#027DFD]" },
+  { alt: "OpenAI",     label: "OpenAI",     bg: "bg-[#10a37f]" },
+  { alt: "AWS",        label: "AWS",        bg: "bg-[#FF9900]" },
 ];
 
 const projects = [
@@ -77,6 +78,8 @@ const projects = [
     ],
     accent: "from-indigo-500 to-violet-500",
     initials: "NW",
+    image:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=70",
   },
   {
     id: "lumen",
@@ -92,6 +95,8 @@ const projects = [
     ],
     accent: "from-emerald-500 to-teal-500",
     initials: "LH",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=70",
   },
   {
     id: "orin",
@@ -107,40 +112,65 @@ const projects = [
     ],
     accent: "from-amber-500 to-orange-500",
     initials: "OL",
+    image:
+      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1000&q=70",
   },
 ];
 
 const stats = [
-  { value: 260, suffix: "+",   label: "Projects shipped" },
-  { value: 11,  suffix: " yrs",label: "In production" },
-  { value: 98,  suffix: "%",   label: "Client retention" },
-  { value: 4.9, suffix: "/5",  label: "Avg rating", decimals: 1 },
+  { value: 260, suffix: "+",   label: "Projects shipped", icon: Rocket },
+  { value: 11,  suffix: " yrs",label: "In production",    icon: Clock },
+  { value: 98,  suffix: "%",   label: "Client retention", icon: TrendingUp },
+  { value: 4.9, suffix: "/5",  label: "Avg rating", decimals: 1, icon: Star },
 ];
 
-// ─── Typewriter word ──────────────────────────────────────────────────
+const floatingProof = [
+  {
+    id: "f1",
+    className: "hidden xl:flex top-44 -left-4",
+    icon: Activity,
+    label: "Lighthouse score",
+    value: "98/100",
+    accent: "text-emerald-600 bg-emerald-50 border-emerald-100",
+  },
+  {
+    id: "f2",
+    className: "hidden xl:flex bottom-44 -right-2",
+    icon: Award,
+    label: "Rated Top 1%",
+    value: "Upwork",
+    accent: "text-amber-600 bg-amber-50 border-amber-100",
+  },
+];
+
+/* ─── Typewriter word ────────────────────────────────────────────── */
 function TypewriterWord() {
   const [index, setIndex] = useState(0);
+  const reduced = useReducedMotion();
   useEffect(() => {
+    if (reduced) return;
     const t = setInterval(() => setIndex((i) => (i + 1) % rotatingWords.length), 2800);
     return () => clearInterval(t);
-  }, []);
+  }, [reduced]);
   return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5, ease }}
-        className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 will-change-transform"
-      >
-        {rotatingWords[index]}
-      </motion.span>
-    </AnimatePresence>
+    <span className="relative inline-grid align-bottom">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease }}
+          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500"
+        >
+          {rotatingWords[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 }
 
-// ─── Animated counter ─────────────────────────────────────────────────
+/* ─── Animated counter ───────────────────────────────────────────── */
 function Counter({
   value,
   suffix = "",
@@ -155,10 +185,15 @@ function Counter({
   const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (reduced) {
+      setDisplay(value);
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
@@ -178,26 +213,27 @@ function Counter({
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [value, duration]);
+  }, [value, duration, reduced]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="tabular-nums">
       {display.toFixed(decimals)}
       {suffix}
     </span>
   );
 }
 
-// ─── Project showcase card (no mouse tilt) ────────────────────────────
+/* ─── Project showcase card ─────────────────────────────────────── */
 function ProjectShowcase() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || reduced) return;
     const t = setInterval(() => setIndex((i) => (i + 1) % projects.length), 5200);
     return () => clearInterval(t);
-  }, [paused]);
+  }, [paused, reduced]);
 
   const p = projects[index];
 
@@ -207,30 +243,73 @@ function ProjectShowcase() {
       onMouseLeave={() => setPaused(false)}
       className="relative transition-transform duration-300 ease-out hover:-translate-y-1"
     >
-      <div className="relative rounded-3xl bg-white border border-indigo-100 shadow-[0_30px_80px_-30px_rgba(79,70,229,0.35)] overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-indigo-50 bg-gradient-to-r from-indigo-50/60 to-violet-50/40">
+      {/* soft accent glow — solid-opacity radial, no blur filter */}
+      <div
+        className={`absolute -inset-6 rounded-[2rem] bg-gradient-to-br ${p.accent} opacity-[0.10]`}
+        aria-hidden
+      />
+
+      <div className="relative rounded-3xl bg-white border border-indigo-100 shadow-[0_30px_80px_-30px_rgba(79,70,229,0.4)] overflow-hidden">
+
+        {/* window chrome */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-indigo-50 bg-gradient-to-r from-indigo-50/70 to-violet-50/40">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-300" />
             <span className="w-2.5 h-2.5 rounded-full bg-amber-300" />
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-300" />
           </div>
-          <span className="text-[10.5px] font-bold text-indigo-400 uppercase tracking-[0.16em]">
+          <span className="text-[10.5px] font-bold text-indigo-400 uppercase tracking-[0.16em] tabular-nums">
             Live case file · {String(index + 1).padStart(2, "0")}/{String(projects.length).padStart(2, "0")}
           </span>
         </div>
 
-        <div className="p-5 sm:p-6">
+        {/* image header — opacity-only crossfade */}
+        <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={p.id}
+              src={p.image}
+              alt={`${p.client} — ${p.title}`}
+              loading="lazy"
+              decoding="async"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+
+          {/* colour tint using opacity (cheaper than mix-blend) */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${p.accent} opacity-35`} />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+
+          <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700">
+              In production
+            </span>
+          </div>
+
+          <div className="absolute top-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45">
+            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+            <span className="text-[10px] font-black text-white">5.0</span>
+          </div>
+        </div>
+
+        {/* content */}
+        <div className="p-5 sm:p-6 -mt-10 relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={p.id}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
+              exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.42, ease }}
             >
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${p.accent} flex items-center justify-center text-white text-[13px] font-black shadow-md`}>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${p.accent} flex items-center justify-center text-white text-[13px] font-black shadow-lg ring-4 ring-white`}>
                     {p.initials}
                   </div>
                   <div>
@@ -238,19 +317,20 @@ function ProjectShowcase() {
                     <p className="text-[11px] text-slate-400 mt-0.5">{p.industry}</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-full">
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
+                  <BadgeCheck className="w-3 h-3" />
                   Shipped
                 </span>
               </div>
 
-              <h3 className="text-[17px] font-bold text-slate-900 tracking-tight">{p.title}</h3>
+              <h3 className="text-[17.5px] font-bold text-slate-900 tracking-tight">{p.title}</h3>
               <p className="text-[13px] text-slate-500 leading-relaxed mt-2">{p.summary}</p>
 
               <div className="grid grid-cols-2 gap-2.5 mt-5">
                 {p.metrics.map((m) => (
                   <div key={m.label} className="rounded-xl bg-slate-50 border border-slate-100 p-3">
                     <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">{m.label}</p>
-                    <p className="text-lg font-black text-slate-900 tracking-tight mt-1">{m.value}</p>
+                    <p className="text-lg font-black text-slate-900 tracking-tight mt-1 tabular-nums">{m.value}</p>
                     <p className="text-[11px] font-semibold text-emerald-600 mt-0.5">{m.note}</p>
                   </div>
                 ))}
@@ -267,6 +347,7 @@ function ProjectShowcase() {
           </AnimatePresence>
         </div>
 
+        {/* footer */}
         <div className="px-5 sm:px-6 py-3.5 border-t border-indigo-50 flex items-center justify-between bg-gradient-to-r from-indigo-50/40 to-violet-50/20">
           <div className="flex gap-1.5">
             {projects.map((_, i) => (
@@ -291,76 +372,133 @@ function ProjectShowcase() {
           </a>
         </div>
       </div>
+
+      {/* micro-testimonial under card */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.1, duration: 0.7, ease }}
+        className="mt-5 flex items-start gap-3 p-4 rounded-2xl bg-white border border-indigo-100 shadow-lg shadow-indigo-100/40"
+      >
+        <Quote className="w-5 h-5 text-indigo-300 fill-indigo-300 shrink-0 mt-0.5" />
+        <div>
+          <p className="text-[12.5px] text-slate-600 leading-relaxed">
+            "Nine weeks, one clean deploy, and checkout conversion nearly tripled."
+          </p>
+          <p className="text-[11px] font-bold text-slate-900 mt-2">
+            Elena W. · <span className="text-slate-400 font-medium">Northwind Retail</span>
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 }
 
-// ─── Client marquee — CSS animation (GPU composited) ──────────────────
+/* ─── Client marquee — gradient edges instead of mask-image ─────── */
 function ClientMarquee() {
   const row = [...clients, ...clients];
   return (
-    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-      <div
-        className="flex gap-12 w-max will-change-transform"
-        style={{ animation: "devcuts-marquee 32s linear infinite" }}
-      >
-        {row.map((c, i) => (
-          <span
-            key={`${c}-${i}`}
-            className="text-[15px] font-bold text-slate-300 hover:text-indigo-400 transition-colors whitespace-nowrap tracking-tight"
-          >
-            {c}
-          </span>
-        ))}
+    <div className="relative">
+      {/* side fade overlays — plain gradients, GPU friendly */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+
+      <div className="overflow-hidden">
+        <div
+          className="flex gap-12 w-max"
+          style={{ animation: "devcuts-marquee 32s linear infinite" }}
+        >
+          {row.map((c, i) => (
+            <span
+              key={`${c}-${i}`}
+              className="text-[15px] font-bold text-slate-300 hover:text-indigo-400 transition-colors whitespace-nowrap tracking-tight"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────
+/* ═════════════════════════════════════════════════════════════════
+   HERO
+   ═════════════════════════════════════════════════════════════════ */
 export default function HeroSection() {
+  const reduced = useReducedMotion();
+
   return (
     <section className="relative flex flex-col pt-24 pb-0 lg:pt-28 overflow-hidden bg-gradient-to-br from-white via-indigo-50/60 to-violet-50/40">
-      {/* Marquee keyframes (global) */}
-      <style jsx global>{`
+
+      <style>{`
         @keyframes devcuts-marquee {
           from { transform: translate3d(0, 0, 0); }
           to   { transform: translate3d(-50%, 0, 0); }
         }
+        /* Drift uses transform only — no blur filter — so it stays on the compositor */
+        @keyframes devcuts-drift-a {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          50%      { transform: translate3d(24px, -30px, 0) scale(1.05); }
+        }
+        @keyframes devcuts-drift-b {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          50%      { transform: translate3d(-28px, 22px, 0) scale(1.06); }
+        }
+        .dv-drift-a { animation: devcuts-drift-a 16s ease-in-out infinite; will-change: transform; }
+        .dv-drift-b { animation: devcuts-drift-b 20s ease-in-out infinite; will-change: transform; }
         @media (prefers-reduced-motion: reduce) {
-          .will-change-transform { animation: none !important; }
+          .dv-drift-a, .dv-drift-b { animation: none !important; }
         }
       `}</style>
 
-      {/* Background layer — static, no scroll parallax */}
+      {/* ═══ BACKGROUND — no filter:blur anywhere ═══════════════
+           Aurora "blobs" are radial gradients, painted once and
+           cached. Drift animation only touches transform.
+      ════════════════════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none" aria-hidden>
-        <div className="absolute -top-32 -left-40 w-[640px] h-[640px] bg-gradient-to-br from-indigo-200/60 to-violet-200/30 rounded-full blur-[90px]" />
-        <div className="absolute -bottom-20 -right-20 w-[560px] h-[560px] bg-gradient-to-tl from-sky-200/50 to-cyan-100/20 rounded-full blur-[80px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] bg-gradient-to-r from-violet-100/40 to-indigo-100/20 rounded-full blur-[70px]" />
 
-        <svg className="absolute inset-0 w-full h-full" aria-hidden>
-          <defs>
-            <pattern id="heroGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1.5" fill="#6366f1" opacity="0.14" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#heroGrid)" />
-        </svg>
+        {/* Aurora — radial gradients (no blur filter) */}
+        <div
+          className="dv-drift-a absolute -top-64 -left-64 w-[900px] h-[900px]"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(129,140,248,0.42) 0%, rgba(129,140,248,0.18) 32%, rgba(129,140,248,0) 68%)",
+          }}
+        />
+        <div
+          className="dv-drift-b absolute -bottom-64 -right-64 w-[820px] h-[820px]"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(125,211,252,0.38) 0%, rgba(125,211,252,0.14) 34%, rgba(125,211,252,0) 70%)",
+          }}
+        />
+        <div
+          className="dv-drift-a absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(196,181,253,0.32) 0%, rgba(196,181,253,0.10) 36%, rgba(196,181,253,0) 72%)",
+          }}
+        />
 
-        <svg className="absolute inset-0 w-full h-full opacity-[0.07]" aria-hidden>
-          {Array.from({ length: 8 }).map((_, i) => (
-            <line
-              key={i}
-              x1={`${i * 15}%`} y1="0%" x2={`${i * 15 + 10}%`} y2="100%"
-              stroke="#6366f1" strokeWidth="1"
-            />
-          ))}
-        </svg>
+        {/* Dot grid via CSS radial-gradient — painted once */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(99,102,241,0.14) 1.5px, transparent 1.5px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
-      {/* ── Main content ─────────────────────────────────────── */}
+      {/* floating proof cards (XL) */}
+      
+
+      {/* ═══ MAIN CONTENT ══════════════════════════════════════ */}
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+
           {/* LEFT */}
           <motion.div
             variants={stagger}
@@ -368,24 +506,13 @@ export default function HeroSection() {
             animate="visible"
             className="lg:col-span-7 text-center lg:text-left"
           >
-            {/* Live badge */}
-            <motion.div variants={fadeUp} className="flex items-center justify-center lg:justify-start mb-6">
-              <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-indigo-200 shadow-[0_8px_30px_-12px_rgba(79,70,229,0.35)] text-[12.5px] font-semibold text-indigo-700">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-                <span>Now accepting new projects</span>
-                <span className="hidden sm:inline text-indigo-200">·</span>
-                <span className="hidden sm:inline text-indigo-900 font-bold">Pakistan's Premier Digital Studio</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-indigo-400" />
-              </span>
-            </motion.div>
+            {/* live badge */}
+            
 
-            {/* Headline */}
+            {/* headline */}
             <motion.h1
               variants={fadeUp}
-              className="text-[44px] sm:text-6xl md:text-7xl lg:text-[68px] xl:text-[76px] font-black tracking-[-0.03em] mb-6 leading-[1.02] text-slate-900"
+              className="text-[42px] sm:text-6xl md:text-7xl lg:text-[66px] xl:text-[74px] font-black tracking-[-0.03em] mb-6 leading-[1.03] text-slate-900"
             >
               We Build{" "}
               <span className="relative inline-block">
@@ -405,7 +532,7 @@ export default function HeroSection() {
               <TypewriterWord />
             </motion.h1>
 
-            {/* Sub-headline */}
+            {/* sub-headline */}
             <motion.p
               variants={fadeUp}
               className="text-[17px] sm:text-lg md:text-xl text-slate-500 mb-7 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
@@ -417,7 +544,7 @@ export default function HeroSection() {
               premium technology solutions that transform brands and deliver compounding growth.
             </motion.p>
 
-            {/* Highlight chips */}
+            {/* highlight chips */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-7">
               {highlights.map(({ icon: Icon, label, color, bg, border }) => (
                 <motion.span
@@ -432,7 +559,7 @@ export default function HeroSection() {
               ))}
             </motion.div>
 
-            {/* Trust pills */}
+            {/* trust pills */}
             <motion.div
               variants={fadeUp}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 mb-7 text-[13px] text-slate-500 font-medium"
@@ -454,7 +581,7 @@ export default function HeroSection() {
                 href="#contact"
                 whileHover={{ scale: 1.04, y: -3 }}
                 whileTap={{ scale: 0.97 }}
-                className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-[14.5px] font-black shadow-[0_20px_50px_-16px_rgba(79,70,229,0.7)] hover:shadow-[0_28px_60px_-16px_rgba(79,70,229,0.85)] transition-shadow flex items-center justify-center gap-2.5"
+                className="group relative overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-[14.5px] font-black shadow-[0_20px_50px_-16px_rgba(79,70,229,0.7)] hover:shadow-[0_28px_60px_-16px_rgba(79,70,229,0.85)] transition-shadow flex items-center justify-center gap-2.5"
               >
                 <Rocket className="w-4 h-4" />
                 <span>Start Your Project</span>
@@ -485,10 +612,10 @@ export default function HeroSection() {
               </motion.a>
             </motion.div>
 
-            {/* Social proof */}
+            {/* social proof row */}
             <motion.div
               variants={scaleIn}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-2"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-8 pt-2"
             >
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
@@ -521,10 +648,25 @@ export default function HeroSection() {
                   </p>
                 </div>
               </div>
+
+              <div className="hidden sm:flex items-center gap-6 pl-6 border-l border-indigo-100">
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-indigo-500" />
+                  <span className="text-[12.5px] font-bold text-slate-700">
+                    <span className="text-slate-900">150+</span> clients
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-amber-500" />
+                  <span className="text-[12.5px] font-bold text-slate-700">
+                    <span className="text-slate-900">2hr</span> avg reply
+                  </span>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — showcase card (top-aligned with left column) */}
+          {/* RIGHT — showcase */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -535,7 +677,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Client marquee */}
+        {/* client marquee */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -550,24 +692,30 @@ export default function HeroSection() {
           <ClientMarquee />
         </motion.div>
 
-        {/* Stats strip with counters */}
+        {/* stats strip with counters + icons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.75, duration: 0.7, ease }}
           className="grid grid-cols-2 md:grid-cols-4 gap-px bg-indigo-100/70 rounded-2xl overflow-hidden border border-indigo-100 mt-10"
         >
-          {stats.map((s) => (
-            <div key={s.label} className="bg-white px-6 py-6 text-center hover:bg-indigo-50/40 transition-colors">
-              <p className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 tracking-tight">
-                <Counter value={s.value} suffix={s.suffix} decimals={s.decimals ?? 0} />
-              </p>
-              <p className="text-[12px] text-slate-500 font-medium mt-1">{s.label}</p>
-            </div>
-          ))}
+          {stats.map((s) => {
+            const Icon = s.icon;
+            return (
+              <div key={s.label} className="group bg-white px-6 py-6 text-center hover:bg-indigo-50/40 transition-colors">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Icon className="w-4 h-4 text-indigo-400 group-hover:text-indigo-600 transition-colors" />
+                </div>
+                <p className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 tracking-tight">
+                  <Counter value={s.value} suffix={s.suffix} decimals={s.decimals ?? 0} />
+                </p>
+                <p className="text-[12px] text-slate-500 font-medium mt-1">{s.label}</p>
+              </div>
+            );
+          })}
         </motion.div>
 
-        {/* Tech shelf */}
+        {/* tech shelf */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -608,7 +756,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
+      {/* scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -619,7 +767,7 @@ export default function HeroSection() {
           Scroll to explore
         </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={reduced ? undefined : { y: [0, 8, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           className="w-5 h-8 rounded-full border-2 border-indigo-200 flex items-start justify-center pt-1.5 will-change-transform"
         >
@@ -627,7 +775,7 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom wave divider */}
+      {/* bottom wave */}
       <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
           <path d="M0 80H1440V30C1200 70 960 10 720 40C480 70 240 0 0 30V80Z" fill="white" />
