@@ -141,10 +141,10 @@ export default function Header() {
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
               <a
-                href="#about"
+                href="/"
                 className="relative px-3.5 py-2 text-[13.5px] font-medium text-slate-600 hover:text-slate-900 transition-colors group"
               >
-                About
+                Home
                 <span className="absolute left-3.5 right-3.5 bottom-1 h-[1.5px] bg-gradient-to-r from-indigo-500 to-violet-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
               </a>
 
