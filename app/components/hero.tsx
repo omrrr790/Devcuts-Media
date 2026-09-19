@@ -515,7 +515,7 @@ export default function HeroSection() {
               className="text-[42px] sm:text-6xl md:text-7xl lg:text-[66px] xl:text-[74px] font-black tracking-[-0.03em] mb-6 leading-[1.03] text-slate-900"
             >
               We Build{" "}
-              <span className="relative inline-block">
+              <span className="relative inline-max">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500">
                   Digital Futures
                 </span>
