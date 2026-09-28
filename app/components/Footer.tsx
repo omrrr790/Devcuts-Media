@@ -1,8 +1,8 @@
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  ChevronRight, Mail, MapPin, Phone, ArrowUpRight,
-  Sparkles, Heart,
-  ArrowUp, CheckCircle2, Zap, Users, Star, Clock,
+  ChevronRight, Mail, MapPin, Phone, ArrowUpRight, Heart, CheckCircle2, Clock, ArrowUp,
 } from "lucide-react";
 
 // ─── Brand SVG icons (lucide removed these due to licensing) ──────────
@@ -32,130 +32,131 @@ const InstagramIcon = ({ className }: IconProps) => (
   </svg>
 );
 
+const LOGO = { src: "/logo.png", width: 669, height: 373 };
+
 // ─── Data ──────────────────────────────────────────────────────────────
 const services = [
-  { label: "React & Next.js Development", href: "#services" },
-  { label: "Full-Stack MERN Apps",         href: "#services" },
-  { label: "AI & ML Integration",          href: "#services" },
-  { label: "Flutter Mobile Apps",          href: "#services" },
-  { label: "Custom ERP / CRM",             href: "#services" },
-  { label: "SEO & Digital Marketing",      href: "#services" },
+  { label: "Full-Stack Web",        href: "/services/web-development" },
+  { label: "Mobile Apps",           href: "/services/mobile-apps" },
+  { label: "ERP & CRM",             href: "/services/erp-crm" },
+  { label: "AI & Automation",       href: "/services/ai-automation" },
+  { label: "SEO & Growth",          href: "/services/seo-growth" },
+  { label: "Cloud & DevOps",        href: "/services/cloud-devops" },
 ];
 
 const company = [
-  { label: "About DevCuts",   href: "#about" },
-  { label: "Our Portfolio",   href: "#work" },
-  { label: "How We Work",     href: "#process" },
-  { label: "Client Reviews",  href: "#testimonials" },
-  { label: "Careers",         href: "#" },
-  { label: "Blog & Insights", href: "#" },
+  { label: "About Devcuts",   href: "/about" },
+  { label: "Our Portfolio",   href: "/#work" },
+  { label: "How We Work",     href: "/#process" },
+  { label: "Client Reviews",  href: "/#testimonials" },
+  { label: "All Services",    href: "/services" },
+  { label: "Book a Call",     href: "/#contact" },
 ];
 
 const social = [
-  { icon: TwitterIcon,   href: "#", label: "Twitter",   hover: "hover:bg-sky-500 hover:border-sky-500" },
-  { icon: LinkedinIcon,  href: "#", label: "LinkedIn",  hover: "hover:bg-blue-600 hover:border-blue-600" },
-  { icon: GithubIcon,    href: "#", label: "GitHub",    hover: "hover:bg-slate-700 hover:border-slate-700" },
-  { icon: InstagramIcon, href: "#", label: "Instagram", hover: "hover:bg-pink-600 hover:border-pink-600" },
+  { icon: TwitterIcon,   href: "#", label: "Twitter" },
+  { icon: LinkedinIcon,  href: "#", label: "LinkedIn" },
+  { icon: GithubIcon,    href: "#", label: "GitHub" },
+  { icon: InstagramIcon, href: "#", label: "Instagram" },
 ];
 
-const trustStats = [
-  { icon: Users,        value: "150+",  label: "Clients served" },
-  { icon: Star,         value: "4.9/5", label: "Average rating" },
-  { icon: Zap,          value: "24hr",  label: "Response time" },
-  { icon: CheckCircle2, value: "260+",  label: "Projects shipped" },
-];
+// const trustStats = [
+//   { icon: Users,        value: "150+",  label: "Clients served" },
+//   { icon: Star,         value: "4.9/5", label: "Average rating" },
+//   { icon: Zap,          value: "24hr",  label: "Response time" },
+//   { icon: CheckCircle2, value: "260+",  label: "Projects shipped" },
+// ];
 
-const badges = ["Next.js", "React", "TypeScript", "Node.js", "MongoDB", "Python", "Flutter", "AWS"];
+const contactRows = [
+  { icon: Mail,   value: "hello@devcuts.com",   href: "mailto:hello@devcuts.com" },
+  { icon: Phone,  value: "+92 300 123 4567",    href: "tel:+923001234567" },
+  { icon: MapPin, value: "Islamabad, Pakistan", href: null },
+];
 
 // ─── Footer ────────────────────────────────────────────────────────────
 export default function Footer() {
   return (
-    <footer className="relative bg-slate-950 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent" />
+    <footer className="relative bg-[var(--brand-black)] overflow-hidden">
+      {/* top hairline */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-      <div
-        className="absolute top-0 inset-x-0 h-[420px] pointer-events-none opacity-70"
-        style={{
-          background:
-            "radial-gradient(60% 100% at 50% 0%, rgba(79,70,229,0.18) 0%, rgba(79,70,229,0) 70%)",
-        }}
-      />
-
-      {/* ─── CTA BANNER ─────────────────────────────────────────── */}
-      <div className="relative z-10 border-b border-white/5">
+      {/* ─── CTA BANNER (white card on dark footer) ─────────────── */}
+      <div className="relative z-10 border-b border-white/10">
         <div className="container mx-auto px-6 lg:px-12 pt-16 pb-14">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-700 shadow-[0_30px_80px_-30px_rgba(79,70,229,0.55)]">
+          <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_40px_100px_-40px_rgba(0,0,0,0.6)]">
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(80% 140% at 100% 0%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 55%)",
+                  "radial-gradient(80% 140% at 100% 0%, rgba(200,30,30,0.08) 0%, rgba(200,30,30,0) 60%)",
               }}
             />
-            <svg className="absolute inset-0 w-full h-full opacity-[0.12] pointer-events-none" aria-hidden>
+            <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" aria-hidden>
               <defs>
                 <pattern id="ctaDots" width="24" height="24" patternUnits="userSpaceOnUse">
-                  <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+                  <circle cx="1.5" cy="1.5" r="1.5" fill="#0a0a0a" />
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#ctaDots)" />
             </svg>
+            <div className="absolute top-0 left-0 right-0 h-1 brand-gradient" />
 
             <div className="relative grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-center p-8 sm:p-10 lg:p-14">
               <div className="text-center lg:text-left">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/25 mb-5">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-red-500/5 border border-brand-red-500/15 mb-5">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--brand-glow)] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-red-500" />
                   </span>
-                  <span className="text-white text-[11px] font-bold uppercase tracking-[0.14em]">
-                    Limited slots · Q2
+                  <span className="text-brand-red-600 text-xs font-bold uppercase tracking-[0.14em]">
+                    Limited slots · Q3
                   </span>
                 </span>
 
-                <h3 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-white leading-[1.08] tracking-tight mb-4">
-                  Ready to ship something<br className="hidden sm:block" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-sky-200">
+                <h3 className="text-2xl md:text-3xl font-bold font-display text-ink leading-[1.15] tracking-tight mb-4">
+                  Ready to ship something
+                  <br className="hidden sm:block" />
+                  <span className="brand-gradient bg-clip-text text-transparent">
                     {" "}your users love?
                   </span>
                 </h3>
 
-                <p className="text-indigo-100/80 font-light text-[15px] max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Book a free 30-minute strategy call. You'll leave with a real scope, timeline, and
+                <p className="text-ink-soft font-light text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  Book a free 30-minute strategy call. You&apos;ll leave with a real scope, timeline, and
                   budget — no sales pitch.
                 </p>
 
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 mt-6 text-[12.5px] text-indigo-100/90 font-medium">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 mt-6 text-xs text-ink-soft font-medium">
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" /> No commitment
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-red-500" /> No commitment
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" /> NDA on request
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-red-500" /> NDA on request
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" /> Fixed-scope quote
+                    <CheckCircle2 className="w-3.5 h-3.5 text-brand-red-500" /> Fixed-scope quote
                   </span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-3 w-full max-w-sm mx-auto lg:mx-0 lg:ml-auto">
-                <a
-                  href="#contact"
-                  className="group inline-flex items-center justify-between gap-3 px-6 py-4 rounded-2xl bg-white text-indigo-700 text-[14px] font-black hover:bg-indigo-50 transition-colors shadow-lg"
+                <Link
+                  href="/#contact"
+                  className="group inline-flex items-center justify-between gap-3 px-6 py-4 rounded-2xl btn btn-primary text-sm"
                 >
                   <span>Book Free Consultation</span>
-                  <span className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white shrink-0">
+                  <span className="w-7 h-7 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-white shrink-0">
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
-                </a>
-                <a
-                  href="#work"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/10 border border-white/25 text-white text-[14px] font-bold hover:bg-white/20 transition-colors"
+                </Link>
+                <Link
+                  href="/#work"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl btn btn-secondary text-sm"
                 >
                   View Our Work
-                </a>
-                <p className="text-center text-[11.5px] text-indigo-100/70 flex items-center justify-center gap-1.5 mt-1">
-                  <Clock className="w-3 h-3" />
+                </Link>
+                <p className="text-center text-xs text-ink-soft flex items-center justify-center gap-1.5 mt-1">
+                  <Clock className="w-3 h-3 text-brand-red-500" />
                   Typical reply within 2 hours
                 </p>
               </div>
@@ -169,45 +170,49 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-14">
 
           {/* Brand column */}
-          <div className="lg:col-span-4 space-y-6">
-            <a href="/" className="inline-flex items-center group">
-              <img
-                src="/footer-logo-removebg-preview.png"
-                alt="DevCutsMedia Logo"
-                className="h-14 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] origin-left"
+          <div className="lg:col-span-3 space-y-6">
+            <Link href="/" className="inline-flex items-center group" aria-label="Devcuts Media — home">
+              <Image
+                src={LOGO.src}
+                alt="Devcuts Media"
+                width={LOGO.width}
+                height={LOGO.height}
+                priority={false}
+                sizes="280px"
+                className="logo-white h-16 md:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] origin-left"
               />
-            </a>
+            </Link>
 
-            <p className="text-slate-400 text-[14px] leading-relaxed font-light max-w-sm">
-              Pakistan's premier digital studio — transforming businesses through
+            <p className="text-white/60 text-sm leading-relaxed font-light max-w-sm">
+              Pakistan&apos;s premier digital studio — transforming businesses through
               cutting-edge Next.js architecture, Python backends, AI integration,
               and premium UI/UX.
             </p>
 
-            <div className="grid grid-cols-2 gap-2.5 max-w-sm">
+            {/* <div className="grid grid-cols-2 gap-2.5 max-w-sm">
               {trustStats.map(({ icon: Icon, value, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/40 hover:bg-white/[0.05] transition-colors group"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/10 hover:border-[var(--brand-glow)]/40 hover:bg-white/[0.08] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center shrink-0 group-hover:bg-indigo-500/25 transition-colors">
-                    <Icon className="w-3.5 h-3.5 text-indigo-300" />
+                  <div className="w-8 h-8 rounded-lg bg-brand-red-500/20 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-red-500/40 transition-colors">
+                    <Icon className="w-3.5 h-3.5 text-[var(--brand-glow)]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-white text-[13px] font-black leading-none">{value}</p>
-                    <p className="text-slate-500 text-[10.5px] font-medium mt-1 truncate">{label}</p>
+                    <p className="text-white text-sm font-black leading-none">{value}</p>
+                    <p className="text-white/50 text-xs font-medium mt-1 truncate">{label}</p>
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             <div className="flex items-center gap-2.5 pt-1">
-              {social.map(({ icon: Icon, href, label, hover }) => (
+              {social.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className={`w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 hover:-translate-y-0.5 ${hover}`}
+                  className="w-10 h-10 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/60 hover:text-white hover:bg-brand-red-500 hover:border-[var(--brand-glow)] hover:shadow-[0_10px_30px_-8px_rgba(200,30,30,0.6)] transition-all duration-200 hover:-translate-y-0.5"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -217,41 +222,41 @@ export default function Footer() {
 
           {/* Services column */}
           <div className="lg:col-span-3">
-            <h4 className="text-white font-black mb-5 text-[12px] uppercase tracking-[0.16em] flex items-center gap-2">
-              <span className="w-1 h-4 rounded-full bg-gradient-to-b from-indigo-500 to-violet-500 inline-block" />
+            <h4 className="text-white font-black mb-5 text-xs uppercase tracking-[0.16em] flex items-center gap-2">
+              <span className="w-1 h-4 rounded-full brand-gradient inline-block" />
               Services
             </h4>
-            <ul className="space-y-1">
+            <ul className="space-y-2.5">
               {services.map(({ label, href }) => (
                 <li key={label}>
-                  <a
+                  <Link
                     href={href}
-                    className="group flex items-center gap-2 py-2 text-[13.5px] text-slate-400 hover:text-white transition-colors"
+                    className="group flex items-center gap-2 py-2 text-sm text-white/60 hover:text-white transition-colors"
                   >
-                    <ChevronRight className="w-3.5 h-3.5 text-indigo-500/50 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[var(--brand-glow)]/50 group-hover:text-[var(--brand-glow)] group-hover:translate-x-0.5 transition-all shrink-0" />
                     <span className="group-hover:translate-x-0.5 transition-transform">{label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Company column */}
-          <div className="lg:col-span-2">
-            <h4 className="text-white font-black mb-5 text-[12px] uppercase tracking-[0.16em] flex items-center gap-2">
-              <span className="w-1 h-4 rounded-full bg-gradient-to-b from-indigo-500 to-violet-500 inline-block" />
+          <div className="lg:col-span-3">
+            <h4 className="text-white font-black mb-5 text-xs uppercase tracking-[0.16em] flex items-center gap-2">
+              <span className="w-1 h-4 rounded-full brand-gradient inline-block" />
               Company
             </h4>
-            <ul className="space-y-1">
+            <ul className="space-y-2.5">
               {company.map(({ label, href }) => (
                 <li key={label}>
-                  <a
+                  <Link
                     href={href}
-                    className="group flex items-center gap-2 py-2 text-[13.5px] text-slate-400 hover:text-white transition-colors"
+                    className="group flex items-center gap-2 py-2 text-sm text-white/60 hover:text-white transition-colors"
                   >
-                    <ChevronRight className="w-3.5 h-3.5 text-indigo-500/50 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[var(--brand-glow)]/50 group-hover:text-[var(--brand-glow)] group-hover:translate-x-0.5 transition-all shrink-0" />
                     <span className="group-hover:translate-x-0.5 transition-transform">{label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -260,25 +265,21 @@ export default function Footer() {
           {/* Contact + Newsletter column */}
           <div className="lg:col-span-3 space-y-7">
             <div>
-              <h4 className="text-white font-black mb-5 text-[12px] uppercase tracking-[0.16em] flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full bg-gradient-to-b from-indigo-500 to-violet-500 inline-block" />
+              <h4 className="text-white font-black mb-5 text-xs uppercase tracking-[0.16em] flex items-center gap-2">
+                <span className="w-1 h-4 rounded-full brand-gradient inline-block" />
                 Get in Touch
               </h4>
               <ul className="space-y-2.5">
-                {[
-                  { icon: Mail,   value: "hello@devcuts.com",   href: "mailto:hello@devcuts.com" },
-                  { icon: Phone,  value: "+92 3XX XXX XXXX",    href: "tel:+923000000000" },
-                  { icon: MapPin, value: "Islamabad, Pakistan", href: null },
-                ].map(({ icon: Icon, value, href }) => (
+                {contactRows.map(({ icon: Icon, value, href }) => (
                   <li key={value}>
                     <a
                       href={href ?? undefined}
                       className={`flex items-start gap-3 group ${href ? "cursor-pointer" : "cursor-default"}`}
                     >
-                      <div className="w-9 h-9 rounded-lg bg-indigo-500/12 border border-indigo-500/20 flex items-center justify-center shrink-0 group-hover:bg-indigo-500/25 transition-colors">
-                        <Icon className="w-3.5 h-3.5 text-indigo-300" />
+                      <div className="w-9 h-9 rounded-lg bg-brand-red-500/20 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-red-500/40 transition-colors">
+                        <Icon className="w-3.5 h-3.5 text-[var(--brand-glow)]" />
                       </div>
-                      <span className="text-slate-400 group-hover:text-white text-[13.5px] leading-tight pt-2 transition-colors">
+                      <span className="text-white/60 group-hover:text-white text-sm leading-tight pt-2 transition-colors">
                         {value}
                       </span>
                     </a>
@@ -287,54 +288,54 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10">
+            {/* <div className="pt-5 border-t border-white/10">
               <div className="flex items-center gap-2 mb-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <p className="text-white font-bold text-[13px]">Stay in the loop</p>
+                <Sparkles className="w-3.5 h-3.5 text-[var(--brand-glow)]" />
+                <p className="text-white font-bold text-sm">Stay in the loop</p>
               </div>
-              <p className="text-slate-500 text-[11.5px] mb-4 font-light leading-relaxed">
+              <p className="text-white/50 text-xs mb-4 font-light leading-relaxed">
                 Monthly insights on tech, design & growth. No spam.
               </p>
               <div className="flex gap-2">
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-[12.5px] focus:outline-none focus:border-indigo-500 focus:bg-white/[0.07] transition-colors"
+                  className="flex-1 min-w-0 px-3.5 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder-white/40 text-xs focus:outline-none focus:border-[var(--brand-glow)] focus:bg-white/[0.08] transition-colors"
                 />
                 <button
                   type="button"
-                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-[12.5px] font-bold hover:from-indigo-500 hover:to-violet-500 transition-all shrink-0 active:scale-95"
+                  className="px-4 py-2.5 rounded-lg btn btn-light text-xs"
                 >
                   Join
                 </button>
               </div>
-              <p className="text-slate-600 text-[10.5px] mt-3 flex items-center gap-1.5">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+              <p className="text-white/50 text-xs mt-3 flex items-center gap-1.5">
+                <CheckCircle2 className="w-3 h-3 text-[var(--brand-glow)]" />
                 Join 2,400+ founders & engineers
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* ─── Tech shelf ──────────────────────────────────────── */}
-        <div className="pt-6 pb-8 border-t border-white/5">
+        {/* <div className="pt-6 pb-8 border-t border-white/10">
           <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
             {badges.map((b) => (
               <span
                 key={b}
-                className="px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/8 text-slate-400 hover:text-indigo-300 hover:border-indigo-500/40 hover:bg-indigo-500/[0.06] transition-colors text-[11px] font-semibold"
+                className="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/60 hover:text-white hover:border-[var(--brand-glow)]/50 hover:bg-brand-red-500/20 transition-colors text-xs font-semibold"
               >
                 {b}
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* ─── Bottom bar ──────────────────────────────────────── */}
-        <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-[12px] flex items-center gap-1.5 text-center md:text-left">
-            © {new Date().getFullYear()} DevCuts Media. All rights reserved. Made with{" "}
-            <Heart className="w-3 h-3 text-rose-500 fill-rose-500 inline" />
+        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/50 text-xs flex items-center gap-1.5 text-center md:text-left">
+            © {new Date().getFullYear()} Devcuts Media. All rights reserved. Made with{" "}
+            <Heart className="w-3 h-3 text-[var(--brand-glow)] fill-[var(--brand-glow)] inline" />
             by Developer Omar in Islamabad, Pakistan.
           </p>
 
@@ -343,7 +344,7 @@ export default function Footer() {
               <a
                 key={link}
                 href="#"
-                className="text-[12px] text-slate-500 hover:text-indigo-400 transition-colors"
+                className="text-xs text-white/50 hover:text-[var(--brand-glow)] transition-colors"
               >
                 {link}
               </a>
@@ -352,9 +353,9 @@ export default function Footer() {
             <a
               href="#top"
               aria-label="Back to top"
-              className="group w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all hover:-translate-y-0.5"
+              className="group flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.06] text-white/60 transition-all hover:-translate-y-0.5 hover:border-[var(--brand-glow)] hover:bg-brand-red-500 hover:text-white"
             >
-              <ArrowUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+              <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>
