@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
   Menu, X, ChevronDown, ArrowRight, Phone,
   Code2, Smartphone, Cloud, Brain, BarChart3, Layers, Sparkles,
@@ -47,40 +47,6 @@ const contactHref = "/#contact";
 // The brand logo — one source of truth so the header + dropdown reuse it
 const LOGO = { src: "/logo.png", width: 669, height: 373, alt: "Devcuts Media" };
 
-/* Magnetic wrapper — only fires on hover, no scroll cost */
-function Magnetic({
-  children,
-  strength = 0.35,
-}: {
-  children: React.ReactNode;
-  strength?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 220, damping: 18 });
-  const sy = useSpring(y, { stiffness: 220, damping: 18 });
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ x: sx, y: sy }}
-      onMouseMove={(e) => {
-        const r = ref.current?.getBoundingClientRect();
-        if (!r) return;
-        x.set((e.clientX - (r.left + r.width / 2)) * strength);
-        y.set((e.clientY - (r.top + r.height / 2)) * strength);
-      }}
-      onMouseLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-      className="inline-block"
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -305,7 +271,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-brand-red-600 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span className="hidden 2xl:inline">+92 300 123 4567</span>
+                <span className="hidden xl:inline">+92 300 123 4567</span>
               </a>
 
               <span className="w-px h-6 bg-black/10" aria-hidden />
@@ -318,19 +284,6 @@ export default function Header() {
               </a>
 
               <LearnLink variant="header" />
-
-              <Magnetic strength={0.28}>
-                <motion.a
-                  href={contactHref}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="group btn btn-primary rounded-full px-5 py-2.5 text-sm"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Book Now</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </motion.a>
-              </Magnetic>
             </div>
 
             {/* Mobile toggle */}
