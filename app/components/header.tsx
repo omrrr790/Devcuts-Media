@@ -9,6 +9,7 @@ import {
   Menu, X, ChevronDown, ArrowRight, Phone,
   Code2, Smartphone, Cloud, Brain, BarChart3, Layers, Sparkles,
 } from "lucide-react";
+import LearnLink from "./LearnLink";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -298,13 +299,13 @@ export default function Header() {
             </nav>
 
             {/* Right actions */}
-            <div className="hidden lg:flex items-center gap-5">
+            <div className="hidden lg:flex items-center gap-3.5 xl:gap-5">
               <a
                 href="tel:+923001234567"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-brand-red-600 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline">+92 300 123 4567</span>
+                <span className="hidden 2xl:inline">+92 300 123 4567</span>
               </a>
 
               <span className="w-px h-6 bg-black/10" aria-hidden />
@@ -315,6 +316,8 @@ export default function Header() {
               >
                 Contact
               </a>
+
+              <LearnLink variant="header" />
 
               <Magnetic strength={0.28}>
                 <motion.a
@@ -425,6 +428,7 @@ export default function Header() {
                 transition={{ delay: 0.5, duration: 0.4, ease }}
                 className="px-6 mt-6 space-y-3"
               >
+                <LearnLink variant="drawer" />
                 <a
                   href={contactHref}
                   onClick={() => setMobileOpen(false)}
