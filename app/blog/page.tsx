@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import BlogIndex from "../components/BlogIndex";
 import { allPosts } from "./data";
-import { site } from "../data/site";
+import { site, siteConfig } from "../data/site";
 
 export const metadata: Metadata = {
-  title: "Blog — Web, Mobile, ERP & AI Insights | Devcuts Media",
-  description:
-    "Practical guides on custom software, ERP/CRM, AI automation, and digital growth from the Devcuts Media engineering team.",
+  title: siteConfig.meta.blog.title,
+  description: siteConfig.meta.blog.description,
+  keywords: siteConfig.meta.blog.keywords,
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Blog — Insights from Devcuts Media",
-    description:
-      "Practical guides on custom software, ERP/CRM, AI automation, and digital growth.",
+    title: siteConfig.meta.blog.title,
+    description: siteConfig.meta.blog.description,
     type: "website",
     url: "/blog",
   },

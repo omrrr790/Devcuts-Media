@@ -180,7 +180,8 @@ export default function Stats() {
             </span>
           </h2>
           <p className="text-base md:text-lg text-ink-soft font-light max-w-xl mx-auto">
-            A snapshot of the delivery, retention, and experience behind every project we take on.
+            A snapshot of the delivery, retention, and experience behind every
+            project from our premium digital studio.
           </p>
         </motion.div>
 

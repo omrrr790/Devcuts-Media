@@ -5,7 +5,7 @@ import "./globals.css";
 // 1. Import your new components
 import Footer from "./components/Footer";
 import Header from "./components/header";
-import { site, sameAs } from "./data/site";
+import { site, sameAs, siteConfig } from "./data/site";
 
 // Body font
 const inter = Inter({
@@ -24,22 +24,17 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Devcuts Media — Premium Web Development & Digital Growth Studio",
+    default: siteConfig.meta.home.title,
     template: "%s",
   },
-  description: site.description,
+  description: siteConfig.meta.home.description,
   applicationName: site.name,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   publisher: site.name,
   keywords: [
-    "web development Pakistan",
-    "Next.js development company",
-    "custom software Islamabad",
-    "ERP CRM development",
-    "mobile app development",
-    "AI automation agency",
-    "SEO services Pakistan",
+    ...siteConfig.keywords.primary,
+    ...siteConfig.keywords.secondary,
     "Devcuts Media",
   ],
   category: "technology",
@@ -54,13 +49,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
-    description: site.description,
+    title: siteConfig.meta.home.title,
+    description: siteConfig.meta.home.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
-    description: site.description,
+    title: siteConfig.meta.home.title,
+    description: siteConfig.meta.home.description,
     creator: "@devcutsmedia",
   },
   robots: {

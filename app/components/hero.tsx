@@ -209,11 +209,12 @@ export default function HeroSection() {
             variants={fadeUp}
             className="text-base md:text-lg text-ink-soft mb-6 max-w-2xl mx-auto leading-relaxed font-light"
           >
-            From SEO dominance to bespoke{" "}
+            From SEO-dominant{" "}
+            <span className="text-brand-red-600 font-semibold">Next.js platforms</span> to bespoke{" "}
             <span className="text-brand-red-600 font-semibold">MERN-stack applications</span>,{" "}
             <span className="text-brand-red-600 font-semibold">AI-powered workflows</span>, and{" "}
-            <span className="text-brand-red-600 font-semibold">Flutter mobile apps</span> — we craft
-            premium technology solutions that transform brands and deliver compounding growth.
+            <span className="text-brand-red-600 font-semibold">Flutter mobile apps</span> — a premium
+            digital studio for bespoke software development that delivers compounding growth.
           </motion.p>
 
           {/* CTAs */}

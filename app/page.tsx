@@ -9,11 +9,12 @@ import FAQ from "./components/FAQ";
 import CTA from "./components/CTA";
 import FloatingButtons from "./components/FloatingButtons";
 import { faqs } from "./data/faq";
+import { siteConfig } from "./data/site";
 
 export const metadata: Metadata = {
-  title: "Devcuts Media — Custom Web, Mobile, ERP & AI Development in Pakistan",
-  description:
-    "Devcuts Media builds custom web platforms, mobile apps, ERP/CRM systems, AI automation, and growth campaigns. A senior Next.js studio in Islamabad delivering measurable results.",
+  title: siteConfig.meta.home.title,
+  description: siteConfig.meta.home.description,
+  keywords: siteConfig.meta.home.keywords,
   alternates: { canonical: "/" },
 };
 

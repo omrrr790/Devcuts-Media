@@ -101,7 +101,8 @@ export default function Process() {
             </span>
           </h2>
           <p className="text-base md:text-lg text-ink-soft font-light">
-            A transparent, five-phase path with a fixed price and a weekly heartbeat.
+            A transparent, five-phase path for bespoke software development —
+            fixed price, weekly heartbeat.
           </p>
         </motion.div>
 

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Reveal from "./Reveal";
 import { serviceBySlug, type ServiceShot } from "../services/data";
+import { postBySlug } from "../blog/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -84,6 +85,17 @@ function ProductShot({ shot }: { shot: ServiceShot }) {
   );
 }
 
+/* Each service links out to the blog posts most relevant to it, keeping
+   topical authority flowing between the service and editorial sections. */
+const serviceReading: Record<string, string[]> = {
+  "web-development": ["web-app-development-process", "custom-software-cost-pakistan"],
+  "mobile-apps": ["web-app-development-process", "ai-automation-for-business"],
+  "erp-crm": ["erp-vs-off-the-shelf", "custom-software-cost-pakistan"],
+  "ai-automation": ["ai-automation-for-business", "top-software-houses-islamabad"],
+  "seo-growth": ["top-software-houses-islamabad", "custom-software-cost-pakistan"],
+  "cloud-devops": ["web-app-development-process", "erp-vs-off-the-shelf"],
+};
+
 export default function ServicePage({ slug }: { slug: string }) {
   const service = serviceBySlug(slug);
   if (!service) return null;
@@ -91,6 +103,10 @@ export default function ServicePage({ slug }: { slug: string }) {
   const relatedServices = service.related
     .map((s) => serviceBySlug(s))
     .filter(Boolean) as NonNullable<ReturnType<typeof serviceBySlug>>[];
+
+  const reading = (serviceReading[service.slug] ?? [])
+    .map((s) => postBySlug(s))
+    .filter(Boolean) as NonNullable<ReturnType<typeof postBySlug>>[];
 
   const Icon = service.icon;
 
@@ -368,6 +384,57 @@ export default function ServicePage({ slug }: { slug: string }) {
                   </motion.div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* e2) related reading — internal links to the blog */}
+      {reading.length > 0 && (
+        <section className="relative overflow-hidden bg-[var(--color-bg)]">
+          <div className="container mx-auto px-6 lg:px-12 py-20 sm:py-24">
+            <Reveal dir="up" amount={0.3}>
+              <div className="flex items-center justify-center gap-5 mb-10">
+                <div className="h-px w-14 bg-black/10" aria-hidden />
+                <span className="text-xs font-black uppercase tracking-[0.18em] text-ink-soft">
+                  From the blog
+                </span>
+                <div className="h-px w-14 bg-black/10" aria-hidden />
+              </div>
+            </Reveal>
+
+            <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+              {reading.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group relative flex flex-col p-7 rounded-2xl bg-white border border-black/10 shadow-sm hover:shadow-[0_28px_60px_-28px_rgba(122,14,14,0.32)] transition-shadow"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-[3px] brand-gradient scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300" />
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-brand-red-500/5 border border-brand-red-500/15 text-brand-red-600 text-[11px] font-bold uppercase tracking-wider self-start mb-4">
+                    {post.category}
+                  </span>
+                  <h3 className="text-lg font-bold font-display text-ink tracking-tight mb-2 leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-ink-soft font-light leading-relaxed flex-1">
+                    {post.excerpt}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand-red-600">
+                    Read article
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex justify-center mt-9">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand-red-600 hover:gap-3 transition-all"
+              >
+                Browse all articles <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>

@@ -45,8 +45,9 @@ export default function TrustedBy() {
 
           <div className="lg:col-span-5">
             <p className="text-base font-light leading-relaxed text-ink-soft">
-              From Karachi and Lahore to Dubai and London — we ship production
-              software for teams that measure results, not promises.
+              From Karachi and Lahore to Dubai and London — a premium digital
+              studio shipping production software for teams that measure
+              results, not promises.
             </p>
 
             <div className="mt-7 flex items-start gap-8 sm:gap-12">

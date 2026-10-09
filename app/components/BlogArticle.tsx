@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 import { postBySlug, relatedPosts, type Block, type Post } from "../blog/data";
+import { services } from "../services/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -165,6 +166,32 @@ export default function BlogArticle({ slug }: { slug: string }) {
                   Part of the Devcuts Media team building web, mobile, and AI
                   systems for businesses worldwide.
                 </p>
+              </div>
+
+              {/* services — internal links back to service pages */}
+              <div className="rounded-2xl bg-white border border-black/10 shadow-sm p-6">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-ink-soft/60 mb-4">
+                  Our services
+                </h3>
+                <ul className="space-y-3">
+                  {services.slice(0, 4).map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={`/services/${s.slug}`}
+                        className="group flex items-center justify-between text-sm font-semibold text-ink-soft hover:text-brand-red-600 transition-colors"
+                      >
+                        {s.navLabel}
+                        <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/services"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand-red-600 hover:gap-2.5 transition-all"
+                >
+                  All services <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
               {/* CTA */}

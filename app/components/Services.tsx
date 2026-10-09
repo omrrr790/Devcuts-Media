@@ -282,13 +282,14 @@ export default function Services() {
             <Sparkles className="w-3 h-3" /> What We Do
           </span>
           <h2 className="text-3xl md:text-4xl font-bold font-display text-ink tracking-tight mb-4">
-            Services that{" "}
+            Bespoke software development that{" "}
             <span className="bg-clip-text text-transparent brand-gradient">
-              Scale Your Business
+              scales your business
             </span>
           </h2>
           <p className="text-base md:text-lg text-ink-soft font-light">
-            One senior team across web, mobile, data, and cloud — no hand-offs, no bloat.
+            One senior team across web, mobile, data, and cloud — from Next.js
+            architecture to custom ERP/CRM, with no hand-offs and no bloat.
           </p>
         </motion.div>
 

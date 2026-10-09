@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import About from "../components/About";
+import { siteConfig } from "../data/site";
 
 export const metadata: Metadata = {
-  title: "About Devcuts Media — A Hands-On Software Studio in Pakistan",
-  description:
-    "Devcuts is a small, hands-on studio designing, building, and maintaining custom ERPs, CRMs, admin dashboards, and internal tools for Pakistani businesses.",
+  title: siteConfig.meta.about.title,
+  description: siteConfig.meta.about.description,
+  keywords: siteConfig.meta.about.keywords,
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Devcuts Media — A Hands-On Software Studio in Pakistan",
-    description:
-      "Devcuts is a small, hands-on studio designing, building, and maintaining custom ERPs, CRMs, admin dashboards, and internal tools for Pakistani businesses.",
+    title: siteConfig.meta.about.title,
+    description: siteConfig.meta.about.description,
     type: "website",
     url: "/about",
   },
