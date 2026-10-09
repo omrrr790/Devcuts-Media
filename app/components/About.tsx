@@ -56,7 +56,7 @@ const team = [
     name: "Syed Meer Ali Shah",
     role: "Co-Founder",
     bio: "The architect behind Devcuts' technical foundation. Meer designs and builds across the full stack — from frontend interfaces to backend systems — and leads the ERP, Frappe, and CRM architecture that powers our clients' operations. He originally shaped the vision for Devcuts and continues to drive its technical direction.",
-    image: null as string | null,
+    image: "/meer.jpeg",
     social: {
       whatsapp: "#",   // e.g. https://wa.me/92XXXXXXXXXX
       instagram: "#",  // e.g. https://instagram.com/username
@@ -68,19 +68,7 @@ const team = [
     name: "Muhammad Omar Kafeel",
     role: "Frontend Lead",
     bio: "A frontend specialist with a sharp eye for interface design, Omar also works comfortably across the backend when projects call for it. He's played a key role supporting the ERP and CRM builds, working closely alongside Meer to bring complex systems to life.",
-    image: null as string | null,
-    social: {
-      whatsapp: "#",   // e.g. https://wa.me/92XXXXXXXXXX
-      instagram: "#",  // e.g. https://instagram.com/username
-      linkedin: "#",   // e.g. https://linkedin.com/in/username
-      twitter: "#",    // e.g. https://x.com/username
-    },
-  },
-  {
-    name: "Zaki Ul Husnain",
-    role: "Full-Stack Developer",
-    bio: "Zaki manages the ongoing maintenance and evolution of our ERP systems across both frontend and backend, and built several of our flagship internal products end-to-end, including the Tax ERP dashboard, the multi-site admin dashboard, and TaskFlow. A full-stack web and software developer who keeps our production systems running smoothly.",
-    image: null as string | null,
+    image: "/omar.jpeg",
     social: {
       whatsapp: "#",   // e.g. https://wa.me/92XXXXXXXXXX
       instagram: "#",  // e.g. https://instagram.com/username
@@ -91,7 +79,7 @@ const team = [
 ];
 
 const aboutStats = [
-  { icon: Users, value: "3", label: "Core Team Members" },
+  { icon: Users, value: "2", label: "Core Team Members" },
   { icon: Layers, value: "260+", label: "Projects Delivered" },
 ];
 
@@ -316,7 +304,7 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {team.map((m) => (
               <motion.div
                 key={m.name}
