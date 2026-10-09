@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { services } from "./services/data";
 import { posts } from "./blog/data";
+import { site } from "./data/site";
 
-const BASE_URL = "https://devcuts.com";
+const BASE_URL = site.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

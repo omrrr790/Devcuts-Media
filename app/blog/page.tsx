@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import BlogIndex from "../components/BlogIndex";
 import { allPosts } from "./data";
+import { site } from "../data/site";
 
 export const metadata: Metadata = {
   title: "Blog — Web, Mobile, ERP & AI Insights | Devcuts Media",
@@ -21,14 +22,14 @@ export default function BlogPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Devcuts Media Blog",
-    url: "https://devcuts.com/blog",
+    url: `${site.url}/blog`,
     blogPost: allPosts.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
       description: p.excerpt,
       datePublished: p.date,
       author: { "@type": "Person", name: p.author },
-      url: `https://devcuts.com/blog/${p.slug}`,
+      url: `${site.url}/blog/${p.slug}`,
     })),
   };
 

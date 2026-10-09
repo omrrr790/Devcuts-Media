@@ -179,5 +179,17 @@ Filling the brief and pressing **Send Project Brief**:
   WhatsApp. Add a Calendly-style link when available.
 - **Blog content** lives in `app/blog/data.ts` (static). Move to a CMS when
   posts need a non-developer editing workflow.
-- **Domain** is assumed as `https://devcuts.com` in `metadataBase`, `sitemap.ts`,
-  and `robots.ts` — update if the production domain differs.
+- **Domain** is set to `https://www.devcuts.com` in `metadataBase`, `app/data/site.ts`,
+  `sitemap.ts`, and `robots.ts` — single source of truth is `app/data/site.ts`.
+
+## 8. SEO setup
+
+- **Files:** `app/sitemap.ts` → `/sitemap.xml`, `app/robots.ts` → `/robots.txt`,
+  `app/manifest.ts` → `/manifest.webmanifest`, `app/opengraph-image.tsx` → social card.
+- **Meta:** unique title + description + canonical per page; root template in `layout.tsx`.
+- **Schema (JSON-LD):** `ProfessionalService` + `WebSite` (site-wide), `FAQPage` (home),
+  `Service` + `BreadcrumbList` (service pages), `Blog` (blog index),
+  `BlogPosting` + `BreadcrumbList` (blog posts).
+- **On-page:** single `<h1>` per page, descriptive `alt` on images, responsive viewport,
+  theme color, favicons/apple-touch/Android icons.
+- **GSC:** submit `/sitemap.xml`; watch Core Web Vitals + Coverage → indexing.

@@ -1,14 +1,16 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://devcuts.com";
+import { site } from "./data/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: `${BASE_URL}/sitemap.xml`,
-    host: BASE_URL,
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+    ],
+    sitemap: `${site.url}/sitemap.xml`,
+    host: site.url,
   };
 }

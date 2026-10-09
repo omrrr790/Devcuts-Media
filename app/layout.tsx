@@ -1,28 +1,134 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 
 // 1. Import your new components
 import Footer from "./components/Footer";
 import Header from "./components/header";
+import { site, sameAs } from "./data/site";
 
 // Body font
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 // Display font for headings
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sora",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devcuts.com"),
-  title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
-  description:
-    "Devcuts Media is a senior-level digital studio crafting Next.js platforms, AI-powered workflows, ERP/CRM systems and growth campaigns that deliver measurable results.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: "Devcuts Media — Premium Web Development & Digital Growth Studio",
+    template: "%s",
+  },
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  keywords: [
+    "web development Pakistan",
+    "Next.js development company",
+    "custom software Islamabad",
+    "ERP CRM development",
+    "mobile app development",
+    "AI automation agency",
+    "SEO services Pakistan",
+    "Devcuts Media",
+  ],
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: site.url,
+    siteName: site.name,
+    title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
+    description: site.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
+    description: site.description,
+    creator: "@devcutsmedia",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0a0a0a",
+  colorScheme: "light",
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${site.url}/#organization`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  description: site.description,
+  email: site.email,
+  telephone: site.phone,
+  image: `${site.url}${site.logo}`,
+  logo: `${site.url}${site.logo}`,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.locality,
+    addressCountry: site.country,
+  },
+  areaServed: ["Pakistan", "United States", "United Kingdom", "United Arab Emirates", "Australia"],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: site.phone,
+      contactType: "customer service",
+      email: site.email,
+      availableLanguage: ["en", "ur"],
+      areaServed: "Worldwide",
+    },
+  ],
+  sameAs,
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  description: site.description,
+  inLanguage: "en",
+  publisher: { "@id": `${site.url}/#organization` },
 };
 
 export default function RootLayout({
@@ -36,6 +142,14 @@ export default function RootLayout({
       className={`${inter.variable} ${sora.variable} bg-[var(--color-bg)]`}
     >
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <Header />
         <main id="top">{children}</main>
         <Footer />

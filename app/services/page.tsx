@@ -5,6 +5,14 @@ export const metadata: Metadata = {
   title: "Services — Devcuts Media | Web, Mobile, ERP/CRM, AI, SEO & Cloud",
   description:
     "Custom web platforms, mobile apps, ERPs/CRMs, AI automation, SEO growth, and cloud/DevOps — delivered by one senior Devcuts team.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services — Devcuts Media",
+    description:
+      "Custom web platforms, mobile apps, ERPs/CRMs, AI automation, SEO growth, and cloud/DevOps — delivered by one senior Devcuts team.",
+    type: "website",
+    url: "/services",
+  },
 };
 
 export default function ServicesPage() {
