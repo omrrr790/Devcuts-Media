@@ -28,7 +28,7 @@ export const posts: Post[] = [
     category: "Business",
     date: "2026-03-02",
     readingTime: "8 min read",
-    author: "Syed Meer Ali Shah",
+    author: "Shad Muhamd",
     metaTitle:
       "Top Software Houses in Islamabad for Digital Growth (2026) | Devcuts Media",
     metaDesc:
@@ -150,7 +150,7 @@ export const posts: Post[] = [
     category: "Business",
     date: "2026-02-18",
     readingTime: "7 min read",
-    author: "Muhammad Omar Kafeel",
+    author: "Shad Muhamd",
     metaTitle: "Custom Software Cost in Pakistan — 2026 Pricing Guide | Devcuts",
     metaDesc:
       "A transparent 2026 guide to custom software development costs in Pakistan: what drives pricing, typical ranges for web apps, mobile apps and ERP systems, and how to budget.",
@@ -223,7 +223,7 @@ export const posts: Post[] = [
     category: "ERP & CRM",
     date: "2026-02-04",
     readingTime: "6 min read",
-    author: "Syed Meer Ali Shah",
+    author: "Shad Muhamd",
     metaTitle: "Custom ERP vs Off-the-Shelf Software — How to Choose | Devcuts",
     metaDesc:
       "Custom ERP or off-the-shelf SaaS? Compare cost, flexibility, integration, and long-term risk to decide which is right for your business in 2026.",
@@ -289,7 +289,7 @@ export const posts: Post[] = [
     category: "Engineering",
     date: "2026-01-21",
     readingTime: "6 min read",
-    author: "Muhammad Omar Kafeel",
+    author: "Shad Muhamd",
     metaTitle: "Web App Development Process — Idea to Launch | Devcuts Media",
     metaDesc:
       "See how Devcuts takes a web app from idea to launch: discovery, scoping, UI/UX, engineering, QA, and deployment — with a clear process at every step.",
@@ -355,7 +355,7 @@ export const posts: Post[] = [
     category: "AI & Automation",
     date: "2026-01-07",
     readingTime: "5 min read",
-    author: "Syed Meer Ali Shah",
+    author: "Shad Muhamd",
     metaTitle: "5 Ways AI Automation Saves Businesses Money in 2026 | Devcuts",
     metaDesc:
       "Five practical AI automation use cases for 2026 — support, sales, data entry, document processing, and reporting — and how to implement them without hype.",
