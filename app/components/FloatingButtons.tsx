@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 const WHATSAPP_URL =
-  "https://wa.me/923001234567?text=" +
+  "https://wa.me/923405609087?text=" +
   encodeURIComponent("Hi Devcuts! I'd like to discuss a project.");
 
 function WhatsAppIcon({ className }: { className?: string }) {

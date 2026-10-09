@@ -30,7 +30,7 @@ const secondaryCards = [
     title: "WhatsApp Us",
     desc: "Chat with us directly on WhatsApp for fast answers.",
     action: "Open WhatsApp",
-    href: "https://wa.me/923001234567",
+    href: "https://wa.me/923405609087",
     metric: { value: "~2 hrs", label: "Avg reply" },
   },
 ];
@@ -99,7 +99,7 @@ const trustPoints = [
 
 const contactRows = [
   { icon: Mail,   label: "Email Us",        value: "hello@devcuts.com" },
-  { icon: Phone,  label: "Call / WhatsApp", value: "+92 300 123 4567" },
+  { icon: Phone,  label: "Call / WhatsApp", value: "+92 340 5609087" },
   { icon: MapPin, label: "Location",        value: "Islamabad, Pakistan" },
   { icon: Clock,  label: "Working Hours",   value: "Mon–Sat, 9am–8pm PKT" },
 ];
@@ -416,7 +416,7 @@ export default function CTASection() {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+92 300 123 4567"
+                  placeholder="+92 340 5609087"
                   className={inputCls}
                 />
               </div>
@@ -827,7 +827,7 @@ export default function CTASection() {
                 <ArrowRight className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="https://wa.me/923001234567"
+                href="https://wa.me/923405609087"
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl btn btn-secondary text-sm bg-white/10 border-white/15 text-white hover:bg-white/20 hover:border-[var(--brand-glow)] transition-colors"

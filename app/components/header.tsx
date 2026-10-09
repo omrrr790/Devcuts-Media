@@ -267,11 +267,11 @@ export default function Header() {
             {/* Right actions */}
             <div className="hidden lg:flex items-center gap-3.5 xl:gap-5">
               <a
-                href="tel:+923001234567"
+                href="tel:+923405609087"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-brand-red-600 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline">+92 300 123 4567</span>
+                <span className="hidden xl:inline">+92 340 5609087</span>
               </a>
 
               <span className="w-px h-6 bg-black/10" aria-hidden />
@@ -391,7 +391,7 @@ export default function Header() {
                   <ArrowRight className="relative w-4 h-4" />
                 </a>
                 <a
-                  href="tel:+923001234567"
+                  href="tel:+923405609087"
                   className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full border border-black/10 text-ink-soft font-semibold text-sm hover:bg-[var(--color-bg-soft)] transition-colors"
                 >
                   <Phone className="w-4 h-4" />

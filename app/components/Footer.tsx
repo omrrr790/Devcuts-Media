@@ -69,7 +69,7 @@ const social = [
 
 const contactRows = [
   { icon: Mail,   value: "hello@devcuts.com",   href: "mailto:hello@devcuts.com" },
-  { icon: Phone,  value: "+92 300 123 4567",    href: "tel:+923001234567" },
+  { icon: Phone,  value: "+92 340 5609087",    href: "tel:+923405609087" },
   { icon: MapPin, value: "Islamabad, Pakistan", href: null },
 ];
 
