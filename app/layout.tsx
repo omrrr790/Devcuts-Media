@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     "Devcuts Media",
   ],
   category: "technology",
+  verification: {
+    google: "mdCXjlR37fRsEvV0h-iwdBHlyyQA8ql8IPMGYvtZUeY",
+  },
   alternates: {
     canonical: "/",
   },
