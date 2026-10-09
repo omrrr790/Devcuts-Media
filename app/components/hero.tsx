@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
-  ArrowRight, Check, Play, Sparkles, ChevronRight,
+  ArrowRight, Check, Sparkles, ChevronRight,
   ShieldCheck, Clock, Rocket, Layers,
 } from "lucide-react";
 
@@ -239,9 +239,9 @@ export default function HeroSection() {
               className="group px-8 py-4 rounded-full bg-white border-2 border-black/10 text-ink text-[14.5px] font-bold hover:border-brand-red-500/40 hover:text-brand-red-600 transition-all shadow-sm flex items-center justify-center gap-2.5"
             >
               <span className="w-7 h-7 rounded-full brand-gradient flex items-center justify-center shadow-md shadow-brand-red-500/30">
-                <Play className="w-3 h-3 text-white fill-white" />
+                <Layers className="w-3 h-3 text-white" />
               </span>
-              Watch Case Studies
+              See Our Work
               <ChevronRight className="w-4 h-4 text-brand-red-400 group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </motion.div>

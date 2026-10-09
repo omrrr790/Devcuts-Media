@@ -2,7 +2,7 @@ import { GraduationCap, ArrowUpRight } from "lucide-react";
 
 /* Single source of truth for the Devcuts Learn (LMS) destination.
    Change here and every placement updates. */
-export const LEARN_URL = "https://devcuts.vercel.app/login";
+export const LEARN_URL = "https://learn.devcuts.com/login";
 
 type Variant = "header" | "drawer";
 

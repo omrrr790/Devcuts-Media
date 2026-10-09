@@ -18,20 +18,20 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const secondaryCards = [
   {
-    icon: Calendar,
-    title: "Free Discovery Call",
-    desc: "Book a 30-min call to walk through your project requirements.",
-    action: "Book a Call",
-    href: "#",
-    metric: { value: "30 min", label: "Free slot" },
-  },
-  {
     icon: MessageSquare,
     title: "WhatsApp Us",
-    desc: "Chat with us directly on WhatsApp for fast answers.",
+    desc: "Chat with us directly on WhatsApp for fast answers and instant quotes.",
     action: "Open WhatsApp",
     href: "https://wa.me/923405609087",
     metric: { value: "~2 hrs", label: "Avg reply" },
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    desc: "Prefer email? Send your requirements and we'll reply with a plan.",
+    action: "Send an email",
+    href: "mailto:hello@devcuts.com",
+    metric: { value: "~6 hrs", label: "Avg reply" },
   },
 ];
 
@@ -125,9 +125,35 @@ export default function CTASection() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError("Please add your name, email, and project details.");
+      return;
+    }
+    setError(null);
+
+    const lines = [
+      "New project brief — Devcuts",
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.phone ? `Phone: ${formData.phone}` : "",
+      formData.type ? `Project type: ${formData.type}` : "",
+      formData.budget ? `Budget: ${formData.budget}` : "",
+      formData.timeline ? `Timeline: ${formData.timeline}` : "",
+      "",
+      "Project details:",
+      formData.message,
+    ].filter(Boolean);
+
+    window.open(
+      `https://wa.me/923405609087?text=${encodeURIComponent(lines.join("\n"))}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+
     setSent(true);
     setTimeout(() => setSent(false), 3200);
   };
@@ -556,8 +582,14 @@ export default function CTASection() {
                 )}
               </motion.button>
 
+              {error && (
+                <p className="text-xs text-brand-red-600 text-center font-semibold">
+                  {error}
+                </p>
+              )}
+
               <p className="text-xs text-ink-soft/60 text-center font-light">
-                No spam, no drip campaigns. One human reply, usually within a few hours.
+                Opens WhatsApp with your brief ready to send — one human reply, usually within a few hours.
               </p>
             </div>
           </motion.div>
@@ -823,7 +855,7 @@ export default function CTASection() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl btn btn-light text-sm shadow-[0_16px_40px_-16px_rgba(255,255,255,0.35)]"
               >
                 <Calendar className="w-4 h-4" />
-                Pick a time slot
+                Request a walkthrough
                 <ArrowRight className="w-4 h-4" />
               </motion.a>
               <motion.a
