@@ -19,6 +19,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devcuts.com"),
   title: "Devcuts Media — Premium Web Development & Digital Growth Studio",
   description:
     "Devcuts Media is a senior-level digital studio crafting Next.js platforms, AI-powered workflows, ERP/CRM systems and growth campaigns that deliver measurable results.",

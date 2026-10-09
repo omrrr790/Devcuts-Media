@@ -49,6 +49,7 @@ const company = [
   { label: "Our Portfolio",   href: "/#work" },
   { label: "How We Work",     href: "/#process" },
   { label: "Client Reviews",  href: "/#testimonials" },
+  { label: "Blog & Insights", href: "/blog" },
   { label: "All Services",    href: "/services" },
   { label: "Book a Call",     href: "/#contact" },
 ];
@@ -340,14 +341,18 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-5">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link) => (
-              <a
-                key={link}
-                href="#"
+            {[
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms of Service", href: "/terms" },
+              { label: "Cookie Policy", href: "/cookies" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
                 className="text-xs text-white/50 hover:text-[var(--brand-glow)] transition-colors"
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             ))}
 
             <a

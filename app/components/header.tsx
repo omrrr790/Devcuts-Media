@@ -39,6 +39,7 @@ const navLinks = [
   { label: "Work", href: "/#work" },
   { label: "Process", href: "/#process" },
   { label: "Reviews", href: "/#testimonials" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
 ];
 
@@ -57,6 +58,7 @@ export default function Header() {
   const isHome = pathname === "/";
   const isAbout = pathname === "/about";
   const isServices = pathname === "/services" || pathname.startsWith("/services/");
+  const isBlog = pathname === "/blog" || pathname.startsWith("/blog/");
 
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
@@ -244,7 +246,10 @@ export default function Header() {
               </div>
 
               {navLinks.map((l) => {
-                const active = (l.label === "About" && isAbout) || (l.label !== "About" && isHome);
+                const active =
+                  (l.label === "About" && isAbout) ||
+                  (l.label === "Blog" && isBlog) ||
+                  (l.label !== "About" && l.label !== "Blog" && isHome);
                 return (
                   <Link
                     key={l.href}
@@ -339,11 +344,13 @@ export default function Header() {
                   { label: "Work", href: "/#work", desc: "260+ shipped projects" },
                   { label: "Process", href: "/#process", desc: "How we engage" },
                   { label: "Reviews", href: "/#testimonials", desc: "150+ verified" },
+                  { label: "Blog", href: "/blog", desc: "Guides & insights" },
                   { label: "About", href: "/about", desc: "The team behind Devcuts Media" },
                 ].map((item, i) => {
                   const active =
                     (item.label === "About" && isAbout) ||
                     (item.label === "Services" && isServices) ||
+                    (item.label === "Blog" && isBlog) ||
                     (item.label === "Work" && isHome);
                   return (
                     <MotionLink

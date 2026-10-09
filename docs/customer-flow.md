@@ -97,6 +97,7 @@ Filling the brief and pressing **Send Project Brief**:
 | Work | `/#work` |
 | Process | `/#process` |
 | Reviews | `/#testimonials` |
+| Blog | `/blog` |
 | About | `/about` |
 | **Contact** | `/#contact` |
 | **Devcuts Learn** | `https://learn.devcuts.com/login` (new tab) |
@@ -131,11 +132,27 @@ Filling the brief and pressing **Send Project Brief**:
 - Related services → `/services/[slug]`
 - Bottom CTA → `/#contact`
 
+### Blog `/blog`
+- Index: featured post + grid; each card → `/blog/[slug]`
+- Category chips, reading time, dates
+- Purpose: SEO content surface + trust building
+
+### Blog article `/blog/[slug]`
+- Breadcrumb → Home / Blog / Category
+- Body + author box + project CTA (`/#contact`)
+- Tags, "more from the blog"
+- SEO: per-post metadata + BlogPosting JSON-LD
+
+### Legal pages `/privacy` · `/terms` · `/cookies`
+- Shared `LegalPage` component (hero + document card + CTA)
+- Linked from the footer; each has its own metadata + canonical
+
 ### Footer (all pages)
 - Brand → `/`
 - `Book a Call` → `/#contact` · `See our work` → `/#work`
-- Service + company links
+- Service + company links (incl. Blog)
 - Contact block: email, phone (+92 340 5609087), Islamabad, hours
+- Legal: Privacy Policy `/privacy` · Terms `/terms` · Cookie Policy `/cookies`
 - Back to top → `#top`
 
 ---
@@ -156,9 +173,11 @@ Filling the brief and pressing **Send Project Brief**:
 
 ## 7. Known gaps / follow-ups
 
-- **Legal pages** (`Privacy Policy`, `Terms of Service`, `Cookie Policy`) are
-  placeholder `href="#"` links in the footer — no pages exist yet.
 - **Brief delivery** is WhatsApp-only (no backend). Wire a real endpoint to
   also capture leads server-side.
 - **Book-a-call** has no calendar integration; it routes through the form /
   WhatsApp. Add a Calendly-style link when available.
+- **Blog content** lives in `app/blog/data.ts` (static). Move to a CMS when
+  posts need a non-developer editing workflow.
+- **Domain** is assumed as `https://devcuts.com` in `metadataBase`, `sitemap.ts`,
+  and `robots.ts` — update if the production domain differs.
